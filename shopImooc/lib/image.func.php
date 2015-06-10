@@ -1,11 +1,10 @@
 <?php
 // 通过GD库做验证码
-//require_once 'string.func.php';
-require_once '../include.php';
-
+require_once 'string.func.php';
+// require_once '../include.php';
 function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_name = "verify")
 {
-    session_start();
+    // session_start();
     
     // 创建画布
     $width = 80;
@@ -26,7 +25,7 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
         "SIMKAI.TTF"
     );
     
-    //产生图像中各个文本
+    // 产生图像中各个文本
     for ($i = 0; $i < $length; $i ++) {
         $size = mt_rand(14, 18);
         $angle = mt_rand(- 15, 15);
@@ -38,7 +37,7 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
         imagettftext($image, $size, $angle, $x, $y, $color, $fontfile, $text);
     }
     
-    //画图像噪点
+    // 画图像噪点
     for ($i = 0; $i < $pixelNum; $i ++) {
         $x = mt_rand(0, $width - 1);
         $y = mt_rand(0, $height - 1);
@@ -46,7 +45,7 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
         imagesetpixel($image, $x, $y, $color);
     }
     
-    //画图像干扰线
+    // 画图像干扰线
     for ($i = 0; $i < $lineNum; $i ++) {
         $x1 = mt_rand(0, $width - 1);
         $y1 = mt_rand(0, $height - 1);
@@ -56,11 +55,11 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
         imageline($image, $x1, $y1, $x2, $y2, $color);
     }
     
-    //显示图像
+    // 显示图像
     header("content-type:image/gif");
     imagegif($image);
     imagedestroy($image);
 }
 
-verifyImage();
+//verifyImage();
 
