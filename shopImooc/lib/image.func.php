@@ -1,11 +1,13 @@
 <?php
 // 通过GD库做验证码
 require_once 'string.func.php';
-// require_once '../include.php';
-function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_name = "verify")
-{
-    // session_start();
-    
+require_once '../lib/common.func.php';
+//require_once '../include.php';
+
+function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_name = 'verify')
+{   
+	
+	startSessionIfSOff();
     // 创建画布
     $width = 80;
     $height = 28;
@@ -21,8 +23,7 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
     $_SESSION[$sess_name] = $chars;
     
     $fontfiles = array(
-        "SIMHEI.TTF",
-        "SIMKAI.TTF"
+        "Abyssinica_SIL.ttf",
     );
     
     // 产生图像中各个文本
@@ -31,7 +32,7 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
         $angle = mt_rand(- 15, 15);
         $x = 5 + $i * $size;
         $y = mt_rand(20, 26);
-        $fontfile = "../fonts/" . $fontfiles[mt_rand(0, count($fontfiles) - 1)];
+        $fontfile = "/var/www/html/BookStore/shopImooc/fonts/" . $fontfiles[mt_rand(0, count($fontfiles) - 1)];
         $color = imagecolorallocate($image, mt_rand(50, 90), mt_rand(80, 200), mt_rand(90, 180));
         $text = substr($chars, $i, 1);
         imagettftext($image, $size, $angle, $x, $y, $color, $fontfile, $text);
