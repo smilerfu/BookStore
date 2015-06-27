@@ -26,6 +26,7 @@ function connect()
  */
 function insert($table, $array)
 {
+	connect();
 	$keys = join(",", array_keys($array));
 	$values = "'" . join("','", array_values($array)) . "'";
 	$sql = "insert into {$table}($keys) values($values)";
@@ -44,10 +45,12 @@ function insert($table, $array)
  */
 function update($table, $array, $where = null)
 {
-	$str = null;
+	connect();
+	$str = "";
+	var_dump($array);
 	foreach($array as $key=>$val)
 	{
-		if($str == null)
+		if($str == "")
 		{
 			$sep = "";
 		}
@@ -55,9 +58,10 @@ function update($table, $array, $where = null)
 		{
 			$sep = ",";
 		}
-		$str = $sep . $key . "='" . $val . "'";
+		$str = $str . $sep . $key . "='" . $val . "'";
 	}
 	$sql = "update {$table} set {$str}" . ($where == null ? null : " where " . $where);
+	//echo $sql;
 	mysql_query($sql);
 	return mysql_affected_rows();
 }
@@ -71,6 +75,7 @@ function update($table, $array, $where = null)
  */
 function delete($table, $where = null)
 {
+	connect();
 	$where = $where == null ? null : " where " . $where;
 	$sql = "delete from {$table}{$where}";
 	mysql_query($sql);
@@ -86,6 +91,7 @@ function delete($table, $where = null)
  */
 function fetchOne($sql, $result_type = MYSQL_ASSOC)
 {
+	connect();
 	$result = mysql_query($sql);
 	$row = mysql_fetch_array($result, $result_type);
 // 	foreach($row as $key=>$value)
@@ -108,7 +114,7 @@ function fetchAll($sql, $result_type = MYSQL_ASSOC)
 	$rows = array();
 	while(@$row = mysql_fetch_array($result, $result_type))
 	{
-		$rows = $row;
+		$rows[] = $row;
 	}
 // 	foreach($rows as $key=>$value)
 // 	{

@@ -28,6 +28,10 @@ function checkLogined() {
 	}
 }
 
+/**
+ * 添加管理员
+ * @return string
+ */
 function addAdmin()
 {
 	connect();
@@ -40,6 +44,36 @@ function addAdmin()
 	else
 	{
 		$mes = "添加失败！<br/><a href='addAdmin.php'>重新添加</a>";
+	}
+	return $mes;
+}
+
+/**
+ * 获取所有管理员
+ * @return Array
+ */
+function getAllAdmin()
+{
+	connect();
+	$sql = "select id, username, email from imooc_admin";
+	$rows=fetchAll($sql);
+	//var_dump($rows);
+	return $rows;
+}
+
+
+function editAdmin($id)
+{
+	connect();
+	$arr=$_POST;
+	$arr['password'] = md5($_POST['password']);
+	if(update("imooc_admin", $arr, "id={$id}"))
+	{
+		$mes="编辑成功！<br/><a href='listAdmin.php'>查看管理员列表</a>";
+	}
+	else
+	{
+		$mes="编辑失败！<br/><a href='listAdmin.php'>请重新修改</a>";
 	}
 	return $mes;
 }

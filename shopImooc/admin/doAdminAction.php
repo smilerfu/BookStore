@@ -1,6 +1,7 @@
 <?php
 require_once '../core/admin.inc.php';
 $act=$_REQUEST['act'];
+
 if($act == "logout")
 {
 	logout();
@@ -8,6 +9,12 @@ if($act == "logout")
 elseif($act == "addAdmin")
 {
 	$mes = addAdmin();
+}
+
+elseif ($act == "editAdmin")
+{
+	$id = $_REQUEST['id'];
+	$mes = editAdmin($id);
 }
 ?>
 
