@@ -28,6 +28,22 @@ function checkLogined() {
 	}
 }
 
+function addAdmin()
+{
+	connect();
+	$arr=$_POST;
+	$arr['password']=md5($_POST['password']);
+	if(insert("imooc_admin", $arr))
+	{
+		$mes = "添加成功！<br/><a href='addAdmin.php'>继续添加</a>|<a href='listAdmin.php'>查看管理员列表</a>";
+	}
+	else
+	{
+		$mes = "添加失败！<br/><a href='addAdmin.php'>重新添加</a>";
+	}
+	return $mes;
+}
+
 /**
  * 管理员退出
  */
