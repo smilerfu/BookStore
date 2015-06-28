@@ -1,5 +1,8 @@
 <?php
+
 require_once '../core/admin.inc.php';
+require_once '../core/cate.inc.php';
+
 $act=$_REQUEST['act'];
 
 if($act == "logout")
@@ -21,6 +24,23 @@ elseif ($act == "delAdmin")
 {
 	$id = $_REQUEST['id'];
 	$mes = delAdmin($id);
+}
+
+elseif($act == "addCate")
+{
+	$mes = addCate();
+}
+
+elseif($act == "editCate")
+{
+	$id = $_REQUEST['id'];
+	$mes = editCate($id);
+}
+
+elseif($act == "delCate")
+{
+	$id = $_REQUEST['id'];
+	$mes = delCate($id);
 }
 ?>
 
