@@ -1,7 +1,15 @@
 <?php 
 require_once '../core/admin.inc.php';
 require_once '../lib/common.func.php';
-$rows=getAllAdmin();
+require_once '../lib/page.func.php';
+
+$pageSize = 2;
+$totalPage = getTotalPage($pageSize);
+$page = isset($_REQUEST['page'])?(int)$_REQUEST['page']:1;
+
+$rows = getAdminByPage($page, $totalPage, $pageSize);
+//$rows=getAllAdmin();
+
 if(!$rows)
 {
 	alertMes("sorry,没有管理员，请添加", "addAdmin.php");
@@ -42,17 +50,33 @@ if(!$rows)
                                 <td><input type="checkbox" id="c1" class="check"><label for="c1" class="label"><?php echo $i;?></label></td>
                                 <td><?php echo $row['username'];?></td>
                                 <td><?php echo $row['email'];?></td>
-                                <td align="center"><input type="button" value="修改" class="btn" onclick="editAdmin(<?php echo $row['id'];?>)"><input type="button" value="删除" class="btn"></td>
+                                <td align="center"><input type="button" value="修改" class="btn" onclick="editAdmin(<?php echo $row['id'];?>)"><input type="button" value="删除" class="btn" onclick="delAdmin(<?php echo $row['id'];?>)"></td>
                             </tr>
                         <?php $i++; endforeach;?>
+                        <?php if($rows>$pageSize):?>
+                        <tr>
+                        	<td colspan="4"><?php echo showPage($page, $totalPage)?></td>
+                        </tr>
+                        <?php endif;?>
                         </tbody>
                     </table>
                 </div>
 </body>
 <script type="text/javascript">
+	function addAdmin(id)
+	{
+		window.location="addAdmin.php";
+	}
 	function editAdmin(id)
 	{
 		window.location="editAdmin.php?id=" + id;
+	}
+	function delAdmin(id)
+	{
+		if(window.confirm("您确定要删除吗？删除之后不可恢复！"))
+		{
+			window.location="doAdminAction.php?act=delAdmin&id=" + id;
+		}
 	}
 		
 </script>

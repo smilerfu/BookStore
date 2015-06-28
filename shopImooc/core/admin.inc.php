@@ -10,7 +10,6 @@ startSessionIfSOff();
  * @return array:
  */
 function checkAdmin($sql) {
-	connect();
 	return fetchOne($sql);
 }
 
@@ -34,7 +33,6 @@ function checkLogined() {
  */
 function addAdmin()
 {
-	connect();
 	$arr=$_POST;
 	$arr['password']=md5($_POST['password']);
 	if(insert("imooc_admin", $arr))
@@ -52,19 +50,47 @@ function addAdmin()
  * 获取所有管理员
  * @return Array
  */
-function getAllAdmin()
+function getAllAdmin($where=null)
 {
-	connect();
 	$sql = "select id, username, email from imooc_admin";
 	$rows=fetchAll($sql);
 	//var_dump($rows);
 	return $rows;
 }
 
+function getTotalPage($pageSize)
+{
+	$sql = "select * from imooc_admin";
+	$totalRows = getResultNum($sql);
+	$totalPage = ceil($totalRows/$pageSize);
+	return $totalPage;
+}
 
+function getAdminByPage($page, $totalPage, $pageSize)
+{
+	if($page<1 || $page==null || !is_numeric($page))
+	{
+		$page = 1;
+	}
+	if($page > $totalPage)
+	{
+		$page = $totalPage;
+	}
+	
+	$offset=($page-1)*$pageSize;
+	
+	$sql="select id,username,email from imooc_admin limit {$offset},{$pageSize}";
+	$rows = fetchAll($sql);
+	return $rows;
+}
+
+/**
+ * 编辑管理员
+ * @param int $id
+ * @return string
+ */
 function editAdmin($id)
 {
-	connect();
 	$arr=$_POST;
 	$arr['password'] = md5($_POST['password']);
 	if(update("imooc_admin", $arr, "id={$id}"))
@@ -74,6 +100,24 @@ function editAdmin($id)
 	else
 	{
 		$mes="编辑失败！<br/><a href='listAdmin.php'>请重新修改</a>";
+	}
+	return $mes;
+}
+
+/**
+ * 删除管理员
+ * @param int $id
+ * @return string
+ */
+function delAdmin($id)
+{
+	if(delete("imooc_admin", "id={$id}"))
+	{
+		$mes="删除成功！<br/><a href='listAdmin.php'>查看管理员列表</a>";
+	}
+	else
+	{
+		$mes="删除失败！<br/><a href='listAdmin.php'>查看管理员列表</a>";
 	}
 	return $mes;
 }

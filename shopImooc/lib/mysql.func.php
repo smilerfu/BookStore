@@ -47,7 +47,7 @@ function update($table, $array, $where = null)
 {
 	connect();
 	$str = "";
-	var_dump($array);
+	//var_dump($array);
 	foreach($array as $key=>$val)
 	{
 		if($str == "")
@@ -110,6 +110,7 @@ function fetchOne($sql, $result_type = MYSQL_ASSOC)
  */
 function fetchAll($sql, $result_type = MYSQL_ASSOC)
 {
+	connect();
 	$result = mysql_query($sql);
 	$rows = array();
 	while(@$row = mysql_fetch_array($result, $result_type))
@@ -131,6 +132,7 @@ function fetchAll($sql, $result_type = MYSQL_ASSOC)
  */
 function getResultNum($sql)
 {
+	connect();
 	$result = mysql_query($sql);
 	return mysql_num_rows($result);
 }

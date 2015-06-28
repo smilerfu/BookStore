@@ -16,6 +16,12 @@ elseif ($act == "editAdmin")
 	$id = $_REQUEST['id'];
 	$mes = editAdmin($id);
 }
+
+elseif ($act == "delAdmin")
+{
+	$id = $_REQUEST['id'];
+	$mes = delAdmin($id);
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
