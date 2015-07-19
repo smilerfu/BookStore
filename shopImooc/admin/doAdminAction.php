@@ -2,6 +2,7 @@
 
 require_once '../core/admin.inc.php';
 require_once '../core/cate.inc.php';
+require_once '../core/pro.inc.php';
 
 $act=$_REQUEST['act'];
 
@@ -41,6 +42,21 @@ elseif($act == "delCate")
 {
 	$id = $_REQUEST['id'];
 	$mes = delCate($id);
+}
+
+elseif ($act == "addPro")
+{
+	$mes = addPro();
+}
+elseif ($act == "editPro")
+{
+	$id = $_REQUEST['id'];
+	$mes = editPro($id);
+}
+elseif ($act == "delPro")
+{
+	$id = $_REQUEST['id'];
+	$mes = delPro($id);
 }
 ?>
 

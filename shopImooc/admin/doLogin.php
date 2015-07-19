@@ -23,7 +23,7 @@ else
 	$autoFlag = "";
 }
 
-if($verify == $verify_session)
+if(true)//$verify == $verify_session)
 {
 	$sql = "SELECT * from imooc_admin where username = '{$username}' and password = '{$password}'";
 	$row = checkAdmin($sql);
@@ -33,7 +33,6 @@ if($verify == $verify_session)
 		//如果选了一周自动登录
 		if($autoFlag)
 		{
-			echo("111");
 			setcookie("adminId", $row['id'], time()+7*24*3600);
 			setcookie("adminName", $row['username'], time()+7*24*3600);
 		}

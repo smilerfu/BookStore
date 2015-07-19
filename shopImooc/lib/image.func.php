@@ -64,3 +64,48 @@ function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_
 
 //verifyImage();
 
+
+/**
+ * 
+ * @param string $filename	要进行缩放的图片文件路径
+ * @param int $dst_w		缩放后的文件宽
+ * @param int $dst_h		缩放后的文件高
+ * @param real $scale		缩放文件比例(在宽和高都设置成null的时候生效，否则不生效)
+ * @param string $destination	保存缩放后的文件路径
+ * @param string $isReservedSource	是否保留原图片文件(不保留会被删除)
+ * @return string	返回生成的缩放图片文件名
+ */
+function thumb($filename, $destination = null, $dst_w=null, $dst_h=null, $scale = 1.0, $isReservedSource=true)
+{
+	list($src_w, $src_h, $imagetype) = getimagesize($filename);
+	if (is_null($dst_w) || is_null($dst_h))
+	{
+		$dst_w = $src_w * $scale;
+		$dst_h = $src_h * $scale;
+	}
+	$dst_w = ceil($dst_w);
+	$dst_h = ceil($dst_h);
+	$mime = image_type_to_mime_type($imagetype);
+	$createFun = str_replace("/", "createfrom", $mime);
+	$outFun = str_replace("/", "", $mime);
+
+	$src_image = $createFun($filename);
+	$dst_image = imagecreatetruecolor($dst_w, $dst_h);
+
+	imagecopyresampled($dst_image, $src_image, 0, 0, 0, 0, 50, 50, $src_w, $src_h);
+	$dstFileName = is_null($destination) ? getUniName().".".getExt($filename):$destination;
+
+	#echo $destination;
+	$outFun($dst_image, $dstFileName);
+
+	imagedestroy($src_image);
+	imagedestroy($dst_image);
+
+	if(!$isReservedSource) //不保留原文件
+	{
+		unlink($filename);
+	}
+
+	return $dstFileName;
+}
+

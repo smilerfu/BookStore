@@ -27,7 +27,6 @@ if($page > $totalPage)
 $offset = ($page - 1) * $pageSize;
 $sql = "select * from imooc_admin limit {$offset}, {$pageSize}";
 $rows = fetchAll($sql);
-//print_r($rows);
 
 foreach ($rows as $row)
 {
@@ -38,7 +37,7 @@ foreach ($rows as $row)
 echo showPage($page, $totalPage);
 echo "<hr/>";
 echo showPage($page, $totalPage, "cid=5");
-*/
+//*/
 function showPage($page, $totalPage, $where=null, $sep="&nbsp")
 {
 	$where = ($where==null)?null:"&".$where;

@@ -34,6 +34,8 @@ function checkLogined() {
 function addAdmin()
 {
 	$arr=$_POST;
+	$rows = fetchOne("select count(id) as countNum from imooc_admin");
+	$arr['id'] = (int)$rows['countNum'] + 1;
 	$arr['password']=md5($_POST['password']);
 	if(insert("imooc_admin", $arr))
 	{
@@ -79,7 +81,7 @@ function getAdminByPage($page, $totalPage, $pageSize)
 	
 	$offset=($page-1)*$pageSize;
 	
-	$sql="select id,username,email from imooc_admin limit {$offset},{$pageSize}";
+	$sql="select id,username,email from imooc_admin order by id limit {$offset},{$pageSize}";
 	$rows = fetchAll($sql);
 	return $rows;
 }

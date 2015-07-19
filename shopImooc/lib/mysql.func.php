@@ -30,8 +30,9 @@ function insert($table, $array)
 	$keys = join(",", array_keys($array));
 	$values = "'" . join("','", array_values($array)) . "'";
 	$sql = "insert into {$table}($keys) values($values)";
-	mysql_query($sql);
-	return mysql_insert_id();
+	$result = mysql_query($sql);
+	//mysql_insert_id(); auto_increament 时返回一个ID，否则返回0
+	return $result;
 }
 
 /**
@@ -62,8 +63,15 @@ function update($table, $array, $where = null)
 	}
 	$sql = "update {$table} set {$str}" . ($where == null ? null : " where " . $where);
 	//echo $sql;
-	mysql_query($sql);
-	return mysql_affected_rows();
+	$result = mysql_query($sql);
+	if($result)
+	{
+		return mysql_affected_rows();
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /**
@@ -106,7 +114,7 @@ function fetchOne($sql, $result_type = MYSQL_ASSOC)
  *
  * @param string $sql        	
  * @param string $result_type        	
- * @return unknown
+ * @return array
  */
 function fetchAll($sql, $result_type = MYSQL_ASSOC)
 {
@@ -137,3 +145,11 @@ function getResultNum($sql)
 	return mysql_num_rows($result);
 }
 
+/**
+ * 得到上一步记录的ID号
+ * @return number
+ */
+function getInsertID()
+{
+	return mysql_insert_id();
+}

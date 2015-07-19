@@ -15,6 +15,12 @@ function addCate()
 	return $mes;
 }
 
+function getCateByID($id)
+{
+	$sql="select id,cName from imooc_cate where id = '{$id}'";
+	return fetchOne($sql);
+}
+
 function getTotalCatePage($pageSize)
 {
 	$sql = "select * from imooc_cate";
@@ -46,11 +52,11 @@ function editCate($id)
 	$arr=$_POST;
 	if(update("imooc_cate", $arr, "id={$id}"))
 	{
-		$mes="编辑成功！<br/><a href='listCate.php'>查看分类列表</a>";
+		$mes="修改分类成功！<br/><a href='listCate.php'>查看分类</a>";
 	}
 	else
 	{
-		$mes="编辑失败！<br/><a href='listCate.php'>请重新修改</a>";
+		$mes="修改分类失败！<br/><a href='listCate.php'>重新修改</a>";
 	}
 	return $mes;
 }
@@ -59,12 +65,22 @@ function delCate($id)
 {
 	if(delete("imooc_cate", "id={$id}"))
 	{
-		$mes="删除成功！<br/><a href='listCate.php'>查看分类列表</a>";
+		$mes="分类删除成功！<br/><a href='listCate.php'>查看分类</a>";
 	}
 	else
 	{
-		$mes="删除失败！<br/><a href='listCate.php'>查看分类列表</a>";
+		$mes="分类删除失败！<br/><a href='listCate.php'>重新操作</a>";
 	}
 	return $mes;
 }
 
+/**
+ * 得到所有分类
+ * @return array
+ */
+function getAllCate()
+{
+	$sql = "select id,cName from imooc_cate";
+	$rows = fetchAll($sql);
+	return $rows;
+}
