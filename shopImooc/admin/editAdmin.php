@@ -1,5 +1,5 @@
 <?php
-require_once '../lib/mysql.func.php';
+require_once(dirname(__FILE__).'/../lib/mysql.func.php');
 $id = $_REQUEST['id'];
 $sql="select id,username,password,email from imooc_admin where id = '{$id}'";
 $row=fetchOne($sql);

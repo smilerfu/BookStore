@@ -1,5 +1,5 @@
 <?php
-require_once 'mysql.func.php';
+require_once(dirname(__FILE__).'/mysql.func.php');
 
 /*
 $sql = "select * from imooc_admin";

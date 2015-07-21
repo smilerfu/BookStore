@@ -1,8 +1,8 @@
 <?php
 
-require_once '../core/admin.inc.php';
-require_once '../core/cate.inc.php';
-require_once '../core/pro.inc.php';
+require_once(dirname(__FILE__).'/../core/admin.inc.php');
+require_once(dirname(__FILE__).'/../core/cate.inc.php');
+require_once(dirname(__FILE__).'/../core/pro.inc.php');
 
 $act=$_REQUEST['act'];
 

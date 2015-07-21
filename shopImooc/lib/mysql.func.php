@@ -1,7 +1,6 @@
 <?php
 
-// require_once '../include.php';
-require_once '../configs/configs.php';
+require_once(dirname(__FILE__).'/../configs/configs.php');
 
 /**
  * 数据库连接操作

@@ -1,6 +1,6 @@
 <?php
-require_once '../lib/mysql.func.php';
-require_once '../core/cate.inc.php';
+require_once(dirname(__FILE__).'/../lib/mysql.func.php');
+require_once(dirname(__FILE__).'/../core/cate.inc.php');
 
 $id = $_REQUEST['id'];
 $row = getCateByID($id);

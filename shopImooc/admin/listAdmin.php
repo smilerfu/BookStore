@@ -1,7 +1,7 @@
 <?php 
-require_once '../core/admin.inc.php';
-require_once '../lib/common.func.php';
-require_once '../lib/page.func.php';
+require_once(dirname(__FILE__).'/../core/admin.inc.php');
+require_once(dirname(__FILE__).'/../lib/common.func.php');
+require_once(dirname(__FILE__).'/../lib/page.func.php');
 
 $pageSize = 2;
 $totalPage = getTotalPage($pageSize);

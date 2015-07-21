@@ -1,8 +1,8 @@
 <?php
-require_once '../lib/upload.func.php';
-require_once '../lib/image.func.php';
-require_once '../lib/mysql.func.php';
-require_once 'album.inc.php';
+require_once(dirname(__FILE__).'/../lib/upload.func.php');
+require_once(dirname(__FILE__).'/../lib/image.func.php');
+require_once(dirname(__FILE__).'/../lib/mysql.func.php');
+require_once(dirname(__FILE__).'/album.inc.php');
 
 
 function addPro() 
@@ -216,6 +216,16 @@ function delPro($id)
 	return $mes;
 }
 
+function checkProExist($id) {
+	$sql = "select * from imooc_pro where cId={$id}";
+	$rows=fetchAll($sql);
+	return $rows;
+}
+
+function getAllPros()
+{
+	return getAllProByAdmin();
+}
 
 
 

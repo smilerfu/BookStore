@@ -1,6 +1,6 @@
 <?php
-require_once '../core/cate.inc.php';
-require_once '../lib/page.func.php';
+require_once(dirname(__FILE__).'/../core/cate.inc.php');
+require_once(dirname(__FILE__).'/../lib/page.func.php');
 // $rows = getAllCateByPage();
 
 $pageSize = 2;

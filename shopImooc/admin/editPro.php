@@ -1,7 +1,7 @@
 <?php 
-require_once '../core/cate.inc.php';
-require_once '../lib/common.func.php';
-require_once '../core/pro.inc.php';
+require_once(dirname(__FILE__).'/../core/cate.inc.php');
+require_once(dirname(__FILE__).'/../lib/common.func.php');
+require_once(dirname(__FILE__).'/../core/pro.inc.php');
 $rows = getAllCate();
 if(!$rows)
 	alertMes("没有分类信息，请先添加分类", "addCate.php");

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../lib/string.func.php';
+require_once(dirname(__FILE__).'/../lib/string.func.php');
 
 function buildInfo($filesinfo)
 {

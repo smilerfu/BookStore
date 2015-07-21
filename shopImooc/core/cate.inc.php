@@ -1,5 +1,6 @@
 <?php
-require_once '../lib/mysql.func.php';
+require_once(dirname(__FILE__).'/../lib/mysql.func.php');
+require_once(dirname(__FILE__).'/../core/pro.inc.php');
 
 function addCate()
 {
@@ -63,13 +64,21 @@ function editCate($id)
 
 function delCate($id)
 {
-	if(delete("imooc_cate", "id={$id}"))
+	$res = checkProExist($id);
+	if (!$res)
 	{
-		$mes="分类删除成功！<br/><a href='listCate.php'>查看分类</a>";
+		if(delete("imooc_cate", "id={$id}"))
+		{
+			$mes="分类删除成功！<br/><a href='listCate.php'>查看分类</a>";
+		}
+		else
+		{
+			$mes="分类删除失败！<br/><a href='listCate.php'>重新操作</a>";
+		}
 	}
-	else
+	else 
 	{
-		$mes="分类删除失败！<br/><a href='listCate.php'>重新操作</a>";
+		$mes="不能删除分类,请先删除分类下产品！<br/><a href='listCate.php'>查看分类</a>";
 	}
 	return $mes;
 }

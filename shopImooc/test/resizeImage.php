@@ -1,5 +1,5 @@
 <?php
-require_once '../lib/string.func.php';
+require_once(dirname(__FILE__).'/../lib/string.func.php');
 /*
 $filename = "uploads/big.jpg";
 $src_image = imagecreatefromjpeg($filename);

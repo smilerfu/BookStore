@@ -1,8 +1,7 @@
 <?php
 // 通过GD库做验证码
-require_once 'string.func.php';
-require_once '../lib/common.func.php';
-//require_once '../include.php';
+require_once(dirname(__FILE__).'/string.func.php');
+require_once(dirname(__FILE__).'/../lib/common.func.php');
 
 function verifyImage($type = 1, $length = 4, $pixelNum = 0, $lineNum = 0, $sess_name = 'verify')
 {   

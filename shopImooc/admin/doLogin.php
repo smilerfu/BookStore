@@ -1,7 +1,7 @@
 <?php
-require_once '../lib/mysql.func.php';
-require_once '../core/admin.inc.php';
-require_once '../lib/common.func.php';
+require_once(dirname(__FILE__).'/../lib/mysql.func.php');
+require_once(dirname(__FILE__).'/../core/admin.inc.php');
+require_once(dirname(__FILE__).'/../lib/common.func.php');
 startSessionIfSOff();
 // foreach ($_POST as $key=>$val)
 // {

@@ -1,6 +1,6 @@
 <?php 
-require_once '../core/pro.inc.php';
-require_once '../lib/page.func.php';
+require_once(dirname(__FILE__).'/../core/pro.inc.php');
+require_once(dirname(__FILE__).'/../lib/page.func.php');
 //$rows = getAllProByAdmin();
 
 date_default_timezone_set("PRC"); //设置当前时间为北京时间，date()函数相关

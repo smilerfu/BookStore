@@ -1,5 +1,5 @@
 <?php
-require_once '../lib/mysql.func.php';
+require_once(dirname(__FILE__).'/../lib/mysql.func.php');
 
 function addAlbum($array) {
 	connect();
