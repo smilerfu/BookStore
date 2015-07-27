@@ -91,7 +91,7 @@ function thumb($filename, $destination = null, $dst_w=null, $dst_h=null, $scale 
 	$src_image = $createFun($filename);
 	$dst_image = imagecreatetruecolor($dst_w, $dst_h);
 
-	imagecopyresampled($dst_image, $src_image, 0, 0, 0, 0, 50, 50, $src_w, $src_h);
+	imagecopyresampled($dst_image, $src_image, 0, 0, 0, 0, $dst_w, $dst_h, $src_w, $src_h);
 	$dstFileName = is_null($destination) ? getUniName().".".getExt($filename):$destination;
 
 	#echo $destination;

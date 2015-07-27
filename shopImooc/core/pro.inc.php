@@ -227,6 +227,21 @@ function getAllPros()
 	return getAllProByAdmin();
 }
 
+function getProsByCid($cId, $indexEnd=null, $indexStart=null) {
+	$sql = "select p.id, p.pName, p.pSn, p.pNum, p.mPrice, p.iPrice, p.pDesc, p.pubTime, p.isShow, p.isHot, c.cName, p.cId from imooc_pro as p join imooc_cate c on p.cId=c.id where p.cId={$cId}";
+	if(!is_null($indexStart))
+	{
+		$sql = $sql." limit {$indexStart}, {$indexEnd}";
+	}
+	elseif (!is_null($indexEnd))
+	{
+		$sql = $sql." limit {$indexEnd}";
+	}
+	//echo $sql;
+	$rows=fetchAll($sql);
+	return $rows;
+}
+
 
 
 
